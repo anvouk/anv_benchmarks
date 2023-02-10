@@ -1,0 +1,15 @@
+# See https://clang.llvm.org/docs/ClangFormatStyleOptions.html
+BasedOnStyle: WebKit
+AllowShortLambdasOnASingleLine: Empty
+AllowShortFunctionsOnASingleLine: Inline
+AllowShortEnumsOnASingleLine: false
+InsertBraces: true
+AlignAfterOpenBracket: BlockIndent
+ColumnLimit: 120
+AlwaysBreakAfterReturnType: None
+BinPackParameters: false
+BinPackArguments: false
+PointerAlignment: Left
+IndentCaseLabels: true
+AlignConsecutiveMacros:
+    Enabled: true
