@@ -8,4 +8,6 @@ set(CMAKE_TOOLCHAIN_FILE "${CMAKE_CURRENT_SOURCE_DIR}/vcpkg/scripts/buildsystems
 
 project(benchmarks)
 
+include_directories(include)
+
 add_subdirectory(src)
