@@ -1,7 +1,6 @@
 .idea
 .vscode
 .vs
-vcpkg
 vcpkg_installed
 .env*
 !.envrc

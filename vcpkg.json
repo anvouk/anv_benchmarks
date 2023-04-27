@@ -1,10 +1,10 @@
 {
   "$schema": "https://raw.githubusercontent.com/microsoft/vcpkg/master/scripts/vcpkg.schema.json",
-  "name": "test-benchmark",
-  "description": "test project",
+  "name": "benchmarks",
+  "description": "benchmarks for various single header C libs",
   "version": "0.1.0",
   "dependencies": [
     "benchmark"
   ],
-  "builtin-baseline": "7e7c62d863b1bf599c1d104b76cd8b74475844d4"
+  "builtin-baseline": "3f34cf3a419872514c15a99f85ce9ac8b008cd68"
 }

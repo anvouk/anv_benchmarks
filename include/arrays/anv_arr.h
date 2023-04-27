@@ -421,16 +421,19 @@ anv_arr__set_internal(
 
 static anv_arr_result
 anv_arr__reallocate(
-    anv_arr_t *refarr, anv_arr__metadata **metadata, size_t new_capacity
+    anv_arr_t *refarr, anv_arr__metadata **refmetadata, size_t new_capacity
 )
 {
     void *resized_arr
-        = anv_meta_realloc(*refarr, (*metadata)->item_sz * new_capacity);
+        = anv_meta_realloc(*refarr, (*refmetadata)->item_sz * new_capacity);
     if (ANV_ARR__UNLIKELY(!resized_arr)) {
         return ANV_ARR_RESULT_ALLOC_ERROR;
     }
-    anv_arr__metadata *new_metadata_loc = (anv_arr__metadata *)anv_meta_get(resized_arr);
-    *metadata = new_metadata_loc;
+    // during reallocations the metadata might be moved somewhere else, we
+    // retrieve it again and propagate it upwards where needed.
+    anv_arr__metadata *new_metadata_loc
+        = (anv_arr__metadata *)anv_meta_get(resized_arr);
+    *refmetadata = new_metadata_loc;
     new_metadata_loc->arr_capacity = new_capacity;
     *refarr = resized_arr;
     return ANV_ARR_RESULT_OK;
@@ -441,17 +444,19 @@ anv_arr__push_internal(
     anv_arr_t *refarr, anv_arr__metadata **refmetadata, void *item
 )
 {
-    anv_arr__metadata *metadata = *refmetadata;
-    if (metadata->arr_sz >= metadata->arr_capacity) {
-        size_t new_capacity = anv_arr__reallocator(metadata->arr_capacity);
+    if ((*refmetadata)->arr_sz >= (*refmetadata)->arr_capacity) {
+        size_t new_capacity
+            = anv_arr__reallocator((*refmetadata)->arr_capacity);
         anv_arr_result res
-            = anv_arr__reallocate(refarr, &metadata, new_capacity);
+            = anv_arr__reallocate(refarr, refmetadata, new_capacity);
         if (res != ANV_ARR_RESULT_OK) {
             return res;
         }
     }
 
-    anv_arr__set_internal(*refarr, metadata->arr_sz++, metadata, item);
+    anv_arr__set_internal(
+        *refarr, (*refmetadata)->arr_sz++, (*refmetadata), item
+    );
     return ANV_ARR_RESULT_OK;
 }
 
@@ -482,7 +487,8 @@ anv_arr__insert(anv_arr_t *refarr, size_t index, void *item)
         // updating the current item. This ensure the old item value is memcpyed
         // to the new location.
         void *old_item = anv_arr__get_internal(*refarr, index, metadata);
-        anv_arr_result res = anv_arr__push_internal(refarr, &metadata, old_item);
+        anv_arr_result res
+            = anv_arr__push_internal(refarr, &metadata, old_item);
         if (res == ANV_ARR_RESULT_OK) {
             anv_arr__set_internal(*refarr, index, metadata, item);
         }
