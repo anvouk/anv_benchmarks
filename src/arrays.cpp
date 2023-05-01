@@ -10,11 +10,12 @@
 #include "stb_ds.h"
 
 #undef ensure
-#define ensure(x)                                                                                                      \
-    do {                                                                                                               \
-        if (!(x)) {                                                                                                    \
-            fprintf(stderr, "@@@ Assert failed: '" #x "' @@@");                                                        \
-        }                                                                                                              \
+#define ensure(x)                                                                           \
+    do {                                                                                    \
+        if (!(x)) {                                                                         \
+            fprintf(stderr, "@@@ [%s:%d] Assert failed: '%s' @@@", __FILE__, __LINE__, #x); \
+            exit(1);                                                                        \
+        }                                                                                   \
     } while (0)
 
 static void BM_arr_memmove(benchmark::State& state)

@@ -11,5 +11,6 @@ BinPackParameters: false
 BinPackArguments: false
 PointerAlignment: Left
 IndentCaseLabels: true
+AlignEscapedNewlines: Left
 AlignConsecutiveMacros:
     Enabled: true
