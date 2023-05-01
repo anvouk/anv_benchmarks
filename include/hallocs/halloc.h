@@ -4,6 +4,16 @@
  *
  *	http://swapped.cc/halloc
  */
+/*
+ *  Repackaged as a single header C lib and cleaned up by Andrea Vouk.
+ *  Other changes:
+ *  - Remove reliance on realloc to free stuff (now always uses free).
+ *  - Rename max_align_t to h_max_align_t to prevent conflicts on Linux.
+ *  - Rename realloc_t to h_realloc_t to prevent conflicts.
+ *  - Add C++ extern C wrapper.
+ *
+ *  https://github.com/anvouk/anv
+ */
 
 /*
  *	The program is distributed under terms of BSD license.
@@ -16,6 +26,10 @@
 #define _LIBP_HALLOC_H_
 
 #include <stddef.h> /* size_t */
+
+#ifdef __cplusplus
+extern "C" {
+#endif
 
 /*
  * core API
@@ -32,16 +46,20 @@ void *h_realloc(void *p, size_t len);
 void h_free(void *p);
 char *h_strdup(const char *str);
 
+#ifdef __cplusplus
+}
+#endif
+
 /*
  * the underlying allocator
  */
-typedef void *(*realloc_t)(void *ptr, size_t len);
+typedef void *(*h_realloc_t)(void *ptr, size_t len);
 
-extern realloc_t halloc_allocator;
+extern h_realloc_t halloc_allocator;
 
 #ifdef HALLOC_IMPLEMENTATION
 
-#include <assert.h>
+#include <assert.h> /* asssert */
 #include <stdlib.h> /* realloc */
 #include <string.h> /* memset & co */
 
@@ -193,9 +211,9 @@ typedef struct hblock {
     h_max_align_t data[1]; /* not allocated, see below */
 } hblock_t;
 
-#define sizeof_hblock offsetof(hblock_t, data)
+h_realloc_t halloc_allocator = NULL;
 
-realloc_t halloc_allocator = NULL;
+#define sizeof_hblock offsetof(hblock_t, data)
 
 #define allocator halloc_allocator
 
@@ -372,26 +390,12 @@ _set_allocator(void)
     assert(!allocator);
 
     /*
-     * the purpose of the test below is to check the behaviour
-     * of realloc(ptr, 0), which is defined in the standard
-     * as an implementation-specific. if it returns zero,
-     * then it's equivalent to free(). it can however return
-     * non-zero, in which case it cannot be used for freeing
-     * memory blocks and we'll need to supply our own version
-     *
-     * Thanks to Stan Tobias for pointing this tricky part out.
+     * Do not try to rely on realloc to free memory even if it supported.
+     * The _realloc wrapper does a good job anyway without really any penalty
+     * so let's not do any 'clever' stuff where it's not necesseary.
+     * A.V.
      */
-    allocator = realloc;
-    if (!(p = malloc(1))) {
-        /* hmm */
-        return;
-    }
-
-    if ((p = realloc(p, 0))) {
-        /* realloc cannot be used as free() */
-        allocator = _realloc;
-        free(p);
-    }
+    allocator = _realloc;
 }
 
 static void *
