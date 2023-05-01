@@ -1,6 +1,17 @@
-# benchmarks
+# anv_benchmarks
 
-Current benchmarks results:
+benchmarks about single header C libraries.
+
+## Benchmark results
+
+Run on my workstation:
+```
+CPU Xeon E5-2699 v3
+RAM 2133MHz ECC
+SSD
+```
+
+Results:
 ```
 Run on (36 X 3600 MHz CPU s)
 CPU Caches:
@@ -43,3 +54,28 @@ BM_h_stb_alloc_free_with_children/512                          11155 ns        1
 BM_h_stb_alloc_free_with_children/4096                         98612 ns        98606 ns         6997
 BM_h_stb_alloc_free_with_children/8192                        203083 ns       203079 ns         3358
 ```
+
+## Setup
+
+This project uses cmake and [vcpkg](https://vcpkg.io/en/) as dependencies manager.
+
+Downloading vcpkg is not necessary since we use the json manifest in combination
+with git submodules and [direnv](https://direnv.net/).
+
+envrc is only needed to add vcpkg submodule to PATH and boostrap its binaries but both
+can be done by hand with little extra effort.
+
+### Steps
+
+1. clone repo with submodules `git clone --recurse-submodules https://github.com/anvouk/anv_benchmarks.git`
+2. If direnv is installed: `direnv allow .`
+3. If direnv is NOT installed: `cd vcpkg && ./bootstrap-vcpkg.sh`
+
+Gluing together vcpkg deps and the benchmarks should now be handled by cmake
+without further steps.
+
+## License
+
+All tested libraries are under their respective licenses (see include headers).
+
+Remaining code is under MIT License.
