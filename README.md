@@ -8,33 +8,38 @@ CPU Caches:
   L1 Instruction 32 KiB (x18)
   L2 Unified 256 KiB (x18)
   L3 Unified 46080 KiB (x1)
-Load Average: 1.56, 1.20, 1.56
+Load Average: 0.88, 1.12, 1.21
 ***WARNING*** CPU scaling is enabled, the benchmark real time measurements may be noisy and will incur extra overhead.
-------------------------------------------------------------------------------------
-Benchmark                                          Time             CPU   Iterations
-------------------------------------------------------------------------------------
-BM_arr_memmove                                  62.0 ns         62.0 ns     10494434
-BM_arr_memcpy                                   57.0 ns         57.0 ns     11930806
-BM_arr_memcpy_same_block                        40.8 ns         40.8 ns     17012524
-BM_arr_anv_arr_push_preallocated                4.65 ns         4.65 ns    151640407
-BM_arr_anv_arr_push                             5.29 ns         5.29 ns    121147962
-BM_arr_kvec_push_preallocated                   1.08 ns         1.08 ns    649822820
-BM_arr_kvec_push                               0.845 ns        0.845 ns    800489021
-BM_arr_stb_ds_push_preallocated                 1.37 ns         1.37 ns    518726109
-BM_arr_stb_ds_push                              2.31 ns         2.31 ns    299695939
-BM_h_malloc_new_free                            10.7 ns         10.7 ns     64279456
-BM_h_halloc_new_free_root                       15.8 ns         15.8 ns     44548429
-BM_h_stb_new_free_root                          14.4 ns         14.4 ns     49154631
-BM_h_halloc_new_children                        22.9 ns         22.9 ns     26620141
-BM_h_stb_new_children                           24.3 ns         24.3 ns     46506825
-BM_h_halloc_alloc_free_with_children/8           206 ns          206 ns      3357222
-BM_h_halloc_alloc_free_with_children/64         1572 ns         1572 ns       454020
-BM_h_halloc_alloc_free_with_children/512       12402 ns        12401 ns        56428
-BM_h_halloc_alloc_free_with_children/4096     105621 ns       105620 ns         6433
-BM_h_halloc_alloc_free_with_children/8192     218636 ns       218622 ns         3140
-BM_h_stb_alloc_free_with_children/8              191 ns          191 ns      3657016
-BM_h_stb_alloc_free_with_children/64            1449 ns         1449 ns       476657
-BM_h_stb_alloc_free_with_children/512          11635 ns        11635 ns        58582
-BM_h_stb_alloc_free_with_children/4096        100125 ns       100119 ns         6927
-BM_h_stb_alloc_free_with_children/8192        206641 ns       206640 ns         3333
+----------------------------------------------------------------------------------------------------
+Benchmark                                                          Time             CPU   Iterations
+----------------------------------------------------------------------------------------------------
+BM_libc_memmove/8                                               2.60 ns         2.60 ns    271141963
+BM_libc_memmove/64                                              2.31 ns         2.31 ns    303950037
+BM_libc_memmove/4096                                            54.7 ns         54.7 ns     12439589
+BM_libc_memcpy/8                                                2.33 ns         2.33 ns    299514547
+BM_libc_memcpy/64                                               2.01 ns         2.01 ns    348194289
+BM_libc_memcpy/4096                                             54.4 ns         54.3 ns     12508066
+BM_libc_malloc_and_free                                         10.7 ns         10.7 ns     64851985
+BM_arr_anv_arr_push                                             4.63 ns         4.63 ns    152459502
+BM_arr_kvec_push                                               0.871 ns        0.870 ns    779495483
+BM_arr_stb_ds_push                                              2.37 ns         2.37 ns    295083925
+BM_arr_stb_stretchy_push/iterations:50000000                    2.35 ns         2.35 ns     50000000
+BM_arr_anv_arr_push_preallocated                                5.16 ns         5.16 ns    134142008
+BM_arr_kvec_push_preallocated                                   1.11 ns         1.11 ns    632073603
+BM_arr_stb_ds_push_preallocated                                 1.39 ns         1.39 ns    497395686
+BM_arr_stb_stretchy_push_preallocated/iterations:50000000       2.32 ns         2.32 ns     50000000
+BM_h_halloc_new_free_root                                       15.7 ns         15.7 ns     44357546
+BM_h_stb_new_free_root                                          14.2 ns         14.2 ns     50146489
+BM_h_halloc_new_children                                        23.4 ns         23.4 ns     26600326
+BM_h_stb_new_children                                           24.7 ns         24.7 ns     47108630
+BM_h_halloc_alloc_free_with_children/8                           214 ns          214 ns      3323670
+BM_h_halloc_alloc_free_with_children/64                         1558 ns         1558 ns       449666
+BM_h_halloc_alloc_free_with_children/512                       12304 ns        12303 ns        55954
+BM_h_halloc_alloc_free_with_children/4096                     103602 ns       103602 ns         6696
+BM_h_halloc_alloc_free_with_children/8192                     218104 ns       218101 ns         3198
+BM_h_stb_alloc_free_with_children/8                              192 ns          192 ns      3620253
+BM_h_stb_alloc_free_with_children/64                            1387 ns         1387 ns       499025
+BM_h_stb_alloc_free_with_children/512                          11155 ns        11154 ns        62565
+BM_h_stb_alloc_free_with_children/4096                         98612 ns        98606 ns         6997
+BM_h_stb_alloc_free_with_children/8192                        203083 ns       203079 ns         3358
 ```

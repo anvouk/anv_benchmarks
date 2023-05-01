@@ -1,37 +1,12 @@
 #include <benchmark/benchmark.h>
 
+#include "utils.h"
+
 #define HALLOC_IMPLEMENTATION
 #include "halloc.h"
 
 #define STB_ALLOC_IMPLEMENTATION
 #include "stb_alloc.h"
-
-#undef ensure
-#define ensure(x)                                                                           \
-    do {                                                                                    \
-        if (!(x)) {                                                                         \
-            fprintf(stderr, "@@@ [%s:%d] Assert failed: '%s' @@@", __FILE__, __LINE__, #x); \
-            exit(1);                                                                        \
-        }                                                                                   \
-    } while (0)
-
-typedef struct test_t {
-    int a;
-    int b;
-    const char* str;
-    uint64_t t;
-} test_t;
-
-static void BM_h_malloc_new_free(benchmark::State& state)
-{
-    test_t* root = NULL;
-    for (auto _ : state) {
-        benchmark::DoNotOptimize(root = (test_t*)malloc(sizeof(test_t)));
-        ensure(root);
-        free(root);
-    }
-}
-BENCHMARK(BM_h_malloc_new_free);
 
 static void BM_h_halloc_new_free_root(benchmark::State& state)
 {
