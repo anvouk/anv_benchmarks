@@ -1,6 +1,5 @@
 #include <benchmark/benchmark.h>
 
-#define ANV_METALLOC_IMPLEMENTATION
 #define ANV_ARR_IMPLEMENTATION
 #include "anv_arr.h"
 
