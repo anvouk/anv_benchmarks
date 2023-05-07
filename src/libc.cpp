@@ -37,11 +37,12 @@ BENCHMARK(BM_libc_memcpy)->Arg(8)->Arg(64)->Arg(4096);
 
 static void BM_libc_malloc_and_free(benchmark::State& state)
 {
-    test_t* root = NULL;
+    void* root = NULL;
     for (auto _ : state) {
-        benchmark::DoNotOptimize(root = (test_t*)malloc(sizeof(test_t)));
+        benchmark::DoNotOptimize(root = malloc(state.range(0)));
         ensure(root);
         free(root);
     }
 }
-BENCHMARK(BM_libc_malloc_and_free);
+BENCHMARK(BM_libc_malloc_and_free)
+    ->Arg(1)->Arg(8)->Arg(16)->Arg(32)->Arg(64)->Arg(128)->Arg(512)->Arg(2048)->Arg(4096);

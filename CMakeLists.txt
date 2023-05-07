@@ -12,5 +12,11 @@ project(benchmarks)
 
 include_directories(include/arrays)
 include_directories(include/hallocs)
+include_directories(include/hashs)
+
+add_library(MurmurHash
+    include/hashs/MurmurHash2.h include/hashs/MurmurHash2.cpp
+    include/hashs/MurmurHash3.h include/hashs/MurmurHash3.cpp
+)
 
 add_subdirectory(src)
