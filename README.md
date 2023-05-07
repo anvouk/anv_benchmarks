@@ -1,6 +1,6 @@
 # anv_benchmarks
 
-benchmarks about single header C libraries.
+benchmarks about random stuff I needed at the moment. There's a bit of everything.
 
 ## Benchmark results
 
@@ -19,40 +19,100 @@ CPU Caches:
   L1 Instruction 32 KiB (x18)
   L2 Unified 256 KiB (x18)
   L3 Unified 46080 KiB (x1)
-Load Average: 0.88, 1.12, 1.21
+Load Average: 0.95, 0.69, 0.50
 ***WARNING*** CPU scaling is enabled, the benchmark real time measurements may be noisy and will incur extra overhead.
 ----------------------------------------------------------------------------------------------------
 Benchmark                                                          Time             CPU   Iterations
 ----------------------------------------------------------------------------------------------------
-BM_libc_memmove/8                                               2.60 ns         2.60 ns    271141963
-BM_libc_memmove/64                                              2.31 ns         2.31 ns    303950037
-BM_libc_memmove/4096                                            54.7 ns         54.7 ns     12439589
-BM_libc_memcpy/8                                                2.33 ns         2.33 ns    299514547
-BM_libc_memcpy/64                                               2.01 ns         2.01 ns    348194289
-BM_libc_memcpy/4096                                             54.4 ns         54.3 ns     12508066
-BM_libc_malloc_and_free                                         10.7 ns         10.7 ns     64851985
-BM_arr_anv_arr_push                                             4.63 ns         4.63 ns    152459502
-BM_arr_kvec_push                                               0.871 ns        0.870 ns    779495483
-BM_arr_stb_ds_push                                              2.37 ns         2.37 ns    295083925
-BM_arr_stb_stretchy_push/iterations:50000000                    2.35 ns         2.35 ns     50000000
-BM_arr_anv_arr_push_preallocated                                5.16 ns         5.16 ns    134142008
-BM_arr_kvec_push_preallocated                                   1.11 ns         1.11 ns    632073603
-BM_arr_stb_ds_push_preallocated                                 1.39 ns         1.39 ns    497395686
-BM_arr_stb_stretchy_push_preallocated/iterations:50000000       2.32 ns         2.32 ns     50000000
-BM_h_halloc_new_free_root                                       15.7 ns         15.7 ns     44357546
-BM_h_stb_new_free_root                                          14.2 ns         14.2 ns     50146489
-BM_h_halloc_new_children                                        23.4 ns         23.4 ns     26600326
-BM_h_stb_new_children                                           24.7 ns         24.7 ns     47108630
-BM_h_halloc_alloc_free_with_children/8                           214 ns          214 ns      3323670
-BM_h_halloc_alloc_free_with_children/64                         1558 ns         1558 ns       449666
-BM_h_halloc_alloc_free_with_children/512                       12304 ns        12303 ns        55954
-BM_h_halloc_alloc_free_with_children/4096                     103602 ns       103602 ns         6696
-BM_h_halloc_alloc_free_with_children/8192                     218104 ns       218101 ns         3198
-BM_h_stb_alloc_free_with_children/8                              192 ns          192 ns      3620253
-BM_h_stb_alloc_free_with_children/64                            1387 ns         1387 ns       499025
-BM_h_stb_alloc_free_with_children/512                          11155 ns        11154 ns        62565
-BM_h_stb_alloc_free_with_children/4096                         98612 ns        98606 ns         6997
-BM_h_stb_alloc_free_with_children/8192                        203083 ns       203079 ns         3358
+BM_libc_memmove/8                                               2.30 ns         2.30 ns    305865876
+BM_libc_memmove/64                                              2.01 ns         2.01 ns    351023766
+BM_libc_memmove/4096                                            51.5 ns         51.5 ns     13468984
+BM_libc_memcpy/8                                                2.59 ns         2.59 ns    272072177
+BM_libc_memcpy/64                                               2.30 ns         2.30 ns    307727125
+BM_libc_memcpy/4096                                             50.7 ns         50.7 ns     13625703
+BM_libc_malloc_and_free/1                                       10.6 ns         10.6 ns     65523947
+BM_libc_malloc_and_free/8                                       10.6 ns         10.6 ns     66609989
+BM_libc_malloc_and_free/16                                      11.5 ns         11.5 ns     60918143
+BM_libc_malloc_and_free/32                                      11.5 ns         11.5 ns     61400371
+BM_libc_malloc_and_free/64                                      11.5 ns         11.5 ns     60707393
+BM_libc_malloc_and_free/128                                     11.5 ns         11.5 ns     59762447
+BM_libc_malloc_and_free/512                                     11.5 ns         11.5 ns     61173679
+BM_libc_malloc_and_free/2048                                    34.0 ns         34.0 ns     20597330
+BM_libc_malloc_and_free/4096                                    38.5 ns         38.5 ns     18196139
+BM_arr_anv_arr_push                                             4.30 ns         4.30 ns    164012063
+BM_arr_kvec_push                                               0.833 ns        0.833 ns    810187558
+BM_arr_stb_ds_push                                              2.31 ns         2.31 ns    298924491
+BM_arr_stb_stretchy_push/iterations:50000000                    2.30 ns         2.30 ns     50000000
+BM_arr_anv_arr_push_preallocated                                3.94 ns         3.94 ns    178588350
+BM_arr_kvec_push_preallocated                                   1.07 ns         1.07 ns    651092430
+BM_arr_stb_ds_push_preallocated                                 1.34 ns         1.34 ns    504798568
+BM_arr_stb_stretchy_push_preallocated/iterations:50000000       2.25 ns         2.25 ns     50000000
+BM_h_halloc_new_free_root                                       15.5 ns         15.5 ns     43701019
+BM_h_stb_new_free_root                                          14.0 ns         14.0 ns     50096284
+BM_h_halloc_new_children                                        22.5 ns         22.5 ns     26631089
+BM_h_stb_new_children                                           25.9 ns         25.9 ns     54809475
+BM_h_halloc_alloc_free_with_children/8                           206 ns          206 ns      3348285
+BM_h_halloc_alloc_free_with_children/64                         1557 ns         1557 ns       444687
+BM_h_halloc_alloc_free_with_children/512                       12202 ns        12202 ns        56557
+BM_h_halloc_alloc_free_with_children/4096                     103574 ns       103573 ns         6471
+BM_h_halloc_alloc_free_with_children/8192                     216254 ns       216246 ns         3216
+BM_h_stb_alloc_free_with_children/8                              181 ns          181 ns      3864757
+BM_h_stb_alloc_free_with_children/64                            1401 ns         1401 ns       491585
+BM_h_stb_alloc_free_with_children/512                          11242 ns        11242 ns        59957
+BM_h_stb_alloc_free_with_children/4096                         98051 ns        98047 ns         7092
+BM_h_stb_alloc_free_with_children/8192                        205333 ns       205326 ns         3409
+BM_hashs_stbds_hash_bytes_32                                    1.63 ns         1.63 ns    418349970
+BM_hashs_stbds_hash_bytes_accidental_32                         2.23 ns         2.23 ns    309089401
+BM_hashs_stbds_hash_bytes_murmur_32                             2.75 ns         2.75 ns    252926500
+BM_hashs_stbds_hash_bytes_64                                    2.58 ns         2.58 ns    270496151
+BM_hashs_stbds_siphash_bytes_chunk/4                            4.86 ns         4.86 ns    136408431
+BM_hashs_stbds_siphash_bytes_chunk/8                            5.73 ns         5.73 ns    114194444
+BM_hashs_stbds_siphash_bytes_chunk/16                           7.99 ns         7.99 ns     84841059
+BM_hashs_stbds_siphash_bytes_chunk/32                           12.0 ns         12.0 ns     56354520
+BM_hashs_stbds_siphash_bytes_chunk/64                           20.1 ns         20.1 ns     35048980
+BM_hashs_stbds_siphash_bytes_chunk/256                          74.4 ns         74.4 ns      9271830
+BM_hashs_stbds_siphash_2_4_bytes_chunk/4                        10.6 ns         10.6 ns     64597923
+BM_hashs_stbds_siphash_2_4_bytes_chunk/8                        13.1 ns         13.1 ns     53640350
+BM_hashs_stbds_siphash_2_4_bytes_chunk/16                       17.0 ns         17.0 ns     40771580
+BM_hashs_stbds_siphash_2_4_bytes_chunk/32                       24.5 ns         24.5 ns     28379591
+BM_hashs_stbds_siphash_2_4_bytes_chunk/64                       39.9 ns         39.9 ns     17499328
+BM_hashs_stbds_siphash_2_4_bytes_chunk/256                       134 ns          134 ns      5101968
+BM_hashs_fasthash_32_chunk/4                                    5.15 ns         5.15 ns    128435025
+BM_hashs_fasthash_32_chunk/8                                    3.75 ns         3.75 ns    187718529
+BM_hashs_fasthash_32_chunk/16                                   4.85 ns         4.84 ns    144072815
+BM_hashs_fasthash_32_chunk/32                                   7.17 ns         7.17 ns     93973575
+BM_hashs_fasthash_32_chunk/64                                   11.8 ns         11.8 ns     58960543
+BM_hashs_fasthash_32_chunk/256                                  44.3 ns         44.3 ns     15642634
+BM_hashs_murmur2_chunk/4                                        4.28 ns         4.28 ns    160171034
+BM_hashs_murmur2_chunk/8                                        5.19 ns         5.19 ns    124375199
+BM_hashs_murmur2_chunk/16                                       6.85 ns         6.85 ns    100210680
+BM_hashs_murmur2_chunk/32                                       10.3 ns         10.3 ns     66314158
+BM_hashs_murmur2_chunk/64                                       17.3 ns         17.3 ns     40577752
+BM_hashs_murmur2_chunk/256                                      71.0 ns         71.0 ns      9585745
+BM_hashs_murmur3_chunk/4                                        4.90 ns         4.90 ns    142787770
+BM_hashs_murmur3_chunk/8                                        5.98 ns         5.98 ns    112268509
+BM_hashs_murmur3_chunk/16                                       8.35 ns         8.35 ns     83917088
+BM_hashs_murmur3_chunk/32                                       12.5 ns         12.5 ns     52383541
+BM_hashs_murmur3_chunk/64                                       23.1 ns         23.1 ns     29956608
+BM_hashs_murmur3_chunk/256                                      90.0 ns         90.0 ns      7557953
+BM_hashs_fasthash_64_chunk/4                                    5.16 ns         5.16 ns    130337420
+BM_hashs_fasthash_64_chunk/8                                    3.71 ns         3.71 ns    187775039
+BM_hashs_fasthash_64_chunk/16                                   4.85 ns         4.85 ns    135942793
+BM_hashs_fasthash_64_chunk/32                                   7.23 ns         7.23 ns     94617846
+BM_hashs_fasthash_64_chunk/64                                   11.8 ns         11.8 ns     58530990
+BM_hashs_fasthash_64_chunk/256                                  44.0 ns         44.0 ns     15975924
+BM_hashs_murmur2_64_chunk/4                                     4.59 ns         4.59 ns    153125236
+BM_hashs_murmur2_64_chunk/8                                     4.29 ns         4.29 ns    163004207
+BM_hashs_murmur2_64_chunk/16                                    5.12 ns         5.12 ns    132515967
+BM_hashs_murmur2_64_chunk/32                                    6.87 ns         6.87 ns     99431900
+BM_hashs_murmur2_64_chunk/64                                    10.3 ns         10.3 ns     65174332
+BM_hashs_murmur2_64_chunk/256                                   36.5 ns         36.5 ns     18978417
+BM_hashs_murmur3_64_chunk/4                                     8.71 ns         8.71 ns     79839874
+BM_hashs_murmur3_64_chunk/8                                     9.74 ns         9.74 ns     70017598
+BM_hashs_murmur3_64_chunk/16                                    8.03 ns         8.03 ns     84420534
+BM_hashs_murmur3_64_chunk/32                                    9.96 ns         9.96 ns     68345297
+BM_hashs_murmur3_64_chunk/64                                    14.3 ns         14.3 ns     47975639
+BM_hashs_murmur3_64_chunk/256                                   41.6 ns         41.6 ns     16738627
 ```
 
 ## Setup
